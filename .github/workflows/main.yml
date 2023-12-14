@@ -93,11 +93,11 @@ jobs:
         run: cat ~/.kube/config
 
       - name: Login to ECR
-        run: kubectl create secret docker-registry regcredss --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS  --docker-password=$(aws ecr get-login-password)
+        run: kubectl create secret docker-registry regcredsss --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS  --docker-password=$(aws ecr get-login-password)
 
       - name: Package Helm Chart
         run: |
-          cd /github/workspace/helm/vprofilecharts
+          cd /github/workspace/helm/vprofilecharts/Chart.yaml
           helm package .
 
       - name: Deploy Helm
