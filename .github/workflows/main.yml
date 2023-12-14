@@ -95,6 +95,11 @@ jobs:
       - name: Login to ECR
         run: kubectl create secret docker-registry regcreds --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS  --docker-password=$(aws ecr get-login-password)
 
+      - name: Package Helm Chart
+        run: |
+          cd /github/workspace/helm/vprofilecharts
+          helm package .
+
       - name: Deploy Helm
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.8
         with:
