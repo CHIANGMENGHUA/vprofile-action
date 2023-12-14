@@ -77,10 +77,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
-        uses: actionscheckout@v4
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
-        uses: aws-actionsconfigure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -96,7 +96,7 @@ jobs:
         run: kubectl create secret docker-registry regcred --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS  --docker-password=$(aws ecr get-login-password)
 
       - name: Deploy Helm
-        uses: bitovigithub-actions-deploy-eks-helm@v1.2.8
+        uses: bitovi/github-actions-deploy-eks-helm@v1.2.8
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
